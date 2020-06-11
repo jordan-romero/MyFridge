@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
     has_many :fridge_items, through: :fridge, source: :items
     has_many :list_items, through: :list, source: :items 
     has_secure_password
+    validates :username, uniqueness: true
 end 

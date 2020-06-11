@@ -1,4 +1,4 @@
-u = User.create(name: "Jordan", username: "Jordles", email: "jordles@gmail.com", password_digest: "1234")
+u = User.create(name: "Jordan", username: "Jordles", email: "jordles@gmail.com", password: "1234")
 
 i = Item.create(name: "apple", expy_date: "6-11-20")
 i2 = Item.create(name: "banana", expy_date: "6-12-20")
