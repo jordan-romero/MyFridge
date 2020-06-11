@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         @user = User.new(name: params[:name], username: params[:username], password: params[:password], email: params[:email])
         if @user.save
             session[:user_id] = @user.id
-            redirect '/'
+            redirect '/fridge'
         else
             erb :'/sessions/signup'
         end
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
         user = User.find_by(username: params[:username])
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
-            redirect '/'
+            redirect '/fridge'
         else 
             @error = "Invalid Credentials. Please try again."
             erb :"sessions/login"
