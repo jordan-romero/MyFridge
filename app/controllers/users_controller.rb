@@ -1,9 +1,14 @@
 class UsersController < ApplicationController 
 
-    get '/fridge' do 
+    get '/dashboard' do 
         authenticate
-        @user = current_user
-        erb :'users/fridge'
+        erb :'user/dashboard'
     end 
+   
+    get 'fridge/items/new' do
+        authenticate
+        erb :'fridge/new'
+    end
+
 
 end 
