@@ -4,11 +4,6 @@ class UsersController < ApplicationController
         authenticate
         erb :'user/dashboard'
     end 
-   
-    get 'fridge/items/new' do
-        authenticate
-        erb :'fridge/new'
-    end
 
 
 end 

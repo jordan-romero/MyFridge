@@ -26,5 +26,10 @@ class ApplicationController < Sinatra::Base
         def authenticate
             redirect 'login' if !logged_in? 
         end 
+
+        # def authorize(resource)
+        #     authenticate
+        #     redirect '/dashboard' if resource.user != current_user
+        #   end
     end 
 end 
