@@ -14,6 +14,7 @@ class ListController < ApplicationController
       end 
 
       get '/list/:id' do
+        authenticate
         @list = current_user.list.id
         # authorize(@fridge)
         erb :'list/index'
@@ -27,7 +28,8 @@ class ListController < ApplicationController
             List.create(user: current_user)
         elsif
             @list = current_user.list
-            @list.items << Item.create_items
+            @list_items = @list.items
+            @list_items.create_items
             redirect '/list/index'
         else
             puts "Oops! Something went wrong!"

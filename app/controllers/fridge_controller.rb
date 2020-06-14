@@ -1,4 +1,6 @@
-class FridgeController < ApplicationController 
+require './config/env'
+
+class FridgeController < ApplicationController
 
     get '/fridge' do
         authenticate
@@ -9,19 +11,19 @@ class FridgeController < ApplicationController
 
 
     get '/fridge/new' do
-        authenticate 
+        authenticate
         erb :'fridge/new'
     end
 
     get '/fridge/:id' do
         @fridge = current_user.fridge.id
-        # authorize(@fridge)
+        authorize(@fridge)
         erb :'fridge/index'
       end
 
-    post '/fridge' do 
+    post '/fridge' do
         authenticate
-        if current_user.fridge == nil 
+        if current_user.fridge == nil
             Fridge.create(user: current_user)
         elsif
             @fridge = current_user.fridge
@@ -31,22 +33,15 @@ class FridgeController < ApplicationController
         else
             puts "Oops! Something went wrong!"
             redirect '/fridge/new'
-        end 
-
-
-        # get '/fridge/edit' do
-            
-        #    if
-        #    current_user.fridge.items.first
-        #     erb :'fridge/edit'
-        #    else 
-            
-        #     redirect '/user/dashboard'
-        #    end 
-        #   end
+        end
     end 
-        
-     
 
-        
-end 
+
+    get 'fridge/edit' do
+        @item = Item.find_by(name: params[:name])
+        erb :'fridge/edit'
+    end
+
+         
+
+end
