@@ -3,7 +3,8 @@ class FridgeController < ApplicationController
     get '/fridge' do
         authenticate
         @user = current_user
-        erb :'/fridge/new'
+        @fridge = current_user.fridge.id
+        erb :'/fridge/index'
       end
 
 
@@ -13,7 +14,7 @@ class FridgeController < ApplicationController
     end
 
     get '/fridge/:id' do
-        @fridge = current_user.fridge
+        @fridge = current_user.fridge.id
         # authorize(@fridge)
         erb :'fridge/index'
       end
@@ -32,11 +33,17 @@ class FridgeController < ApplicationController
             redirect '/fridge/new'
         end 
 
-        get '/fridge/:id/edit' do 
-            @fridge = current_user.fridge
-            #authorize(@fridge)
-            erb :'/fridge/edit'
-          end
+
+        # get '/fridge/edit' do
+            
+        #    if
+        #    current_user.fridge.items.first
+        #     erb :'fridge/edit'
+        #    else 
+            
+        #     redirect '/user/dashboard'
+        #    end 
+        #   end
     end 
         
      

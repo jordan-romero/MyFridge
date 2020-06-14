@@ -2,8 +2,11 @@
 <h2>You have <%=current_user.fridge_items.length%> items in your Fridge </h2>
 <ul>
 <% current_user.fridge_items.all.sort {|a, b| a.name <=> b.name }.each do |item| %>
-   <li><%= item.name %> <%= item.expy_date %></li>
+   <li><%= item.name %> <%= item.expy_date %> <a href='/fridge/edit'>Edit Item </a></li>
+
 <% end%>
+
+<a href='/fridge/new'> Make a new item</a>
 </ul>
 
 

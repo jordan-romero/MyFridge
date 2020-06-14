@@ -16,4 +16,13 @@ class Item < ActiveRecord::Base
     def from_list?
         self.itemizable.is_a?(List)
     end
+
+    def create_items(items)
+        items.each do |items|
+          if items[:name] != ""
+            Item.create(
+              name: params[:name])
+          end
+        end
+    end 
 end 
