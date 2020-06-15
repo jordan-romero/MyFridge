@@ -28,8 +28,8 @@ class ListController < ApplicationController
             List.create(user: current_user)
         elsif
             @list = current_user.list
-            @list_items = @list.items
-            @list_items.create_items
+            @list.items << Item.create(name: params[:name])
+            @list.items.all
             redirect '/list/index'
         else
             puts "Oops! Something went wrong!"

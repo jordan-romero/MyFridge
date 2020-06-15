@@ -25,4 +25,13 @@ class Item < ActiveRecord::Base
     #       end
     #     end
     # end 
+
+    # def create_items(item)
+    #     @list.items.each do |item|
+    #       if item[:name] != ""
+    #         Item.create(
+              
+    #       end
+    #     end
+    #   end
 end 

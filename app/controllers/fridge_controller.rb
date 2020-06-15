@@ -17,7 +17,7 @@ class FridgeController < ApplicationController
 
     get '/fridge/:id' do
         @fridge = current_user.fridge.id
-        authorize(@fridge)
+        # authorize(@fridge)
         erb :'fridge/index'
       end
 
@@ -34,14 +34,15 @@ class FridgeController < ApplicationController
             puts "Oops! Something went wrong!"
             redirect '/fridge/new'
         end
-    end 
-
-
-    get 'fridge/edit' do
-        @item = Item.find_by(name: params[:name])
-        erb :'fridge/edit'
     end
 
-         
+    get '/fridge/:id/edit' do
+
+        @fridge = current_user.fridge
+        @fridge.items.find_by(name: params[:name])
+        erb :'/fridge/edit'
+    end
+
+
 
 end
