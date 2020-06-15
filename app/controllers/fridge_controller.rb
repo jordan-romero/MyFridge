@@ -1,6 +1,8 @@
 require './config/env'
 
 class FridgeController < ApplicationController
+    
+    set :method_override, true
 
     get '/fridge' do
         authenticate
@@ -37,12 +39,31 @@ class FridgeController < ApplicationController
     end
 
     get '/fridge/:id/edit' do
-
+        authenticate
         @fridge = current_user.fridge
-        @fridge.items.find_by(name: params[:name])
+        @fridge.items.find_by(name: params[:name], expy_date: params[:expy_date])
         erb :'/fridge/edit'
     end
 
+    # patch '/fridge/' do 
+    #     authenticate
+    #     @fridge.items.find_or_create_by(name: params[:name], expy_date: params[:expy_date])
+
+    #     if @fridge.items.update(name: params[:name], expy_date: params[:expy_date])
+    
+    #     redirect '/fridge/:id'
+
+    #     else
+
+    #         erb :'fridge/<%=@fridge.item.name%>/edit'
+    #     end 
+     
+    # end 
+    delete '/fridge/:id' do 
+        @fridge_item = current_user.fridge.items.find_by(name: params[:name], expy_date: params[:expy_date])
+        @fridge_item.destroy
+        redirect "fridge/index"
+    end 
 
 
 end

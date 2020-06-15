@@ -5,6 +5,6 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.string :expy_date
       t.references :itemizable, polymorphic: true, index: true 
       t.timestamps 
-  end
-end 
+    end
+  end 
 end
