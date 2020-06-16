@@ -17,21 +17,5 @@ class Item < ActiveRecord::Base
         self.itemizable.is_a?(List)
     end
 
-    # def create_items(items)
-    #     items.map do |items|
-    #       if items[:name] != ""
-    #         Item.create(
-    #           name: params[:name])
-    #       end
-    #     end
-    # end 
-
-    # def create_items(item)
-    #     @list.items.each do |item|
-    #       if item[:name] != ""
-    #         Item.create(
-              
-    #       end
-    #     end
-    #   end
+    
 end 

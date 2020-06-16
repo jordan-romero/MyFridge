@@ -1,34 +1,23 @@
 <form action="/list" method="POST">
-  <%# <label for="name">Item Name:</label>
-  <input type="text" name="name" placeholder="Item" required>
-  <br><br>
-  <label for="name">Item Name:</label>
-  <input type="text" name="name" placeholder="Item" required>
-  <br><br>
-  <label for="name">Item Name:</label>
-  <input type="text" name="name" placeholder="Item" required>
-  <br><br>
-  <label for="name">Item Name:</label>
-  <input type="text" name="name" placeholder="Item" required>
-  <br><br>
-  <label for="name">Item Name:</label>
-  <input type="text" name="name" placeholder="Item" required>
-  <br><br>
-  <label for="name">Item Name:</label>
-  <input type="text" name="name" placeholder="Item" required>
-  <br><br>
-  <label for="name">Item Name:</label>
-  <input type="text" name="name" placeholder="Item" required>
-  <br><br>
-  <label for="name">Item Name:</label>
-  <input type="text" name="name" placeholder="Item" required>
-  <br><br>
-  <label for="name">Item Name:</label>
-  <input type="text" name="name" placeholder="Item" required>
-  <br><br> %>
-  <label for="name">Item Name:</label>
-  <input type="text" name="name" placeholder="Item" required>
-  <br><br>
+ <table>
+    <thead>
+      <tr>
+        <th>Items</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <% 10.times do %>
+      <tr>
+        <td>
+          <input type="text" name="items[][name]" >
+        </td>
+        
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
   
-  <input type="submit" value="Create">
+  <input type="submit" value="Submit">
 </form>

@@ -26,29 +26,31 @@ class ListController < ApplicationController
         authenticate
         if current_user.list == nil 
             List.create(user: current_user)
-        elsif
-            @list = current_user.list
-            @list.items << Item.create(name: params[:name])
-            @list.items.all
-            redirect '/list'
-        else
-            puts "Oops! Something went wrong!"
-            redirect '/list/new'
-        erb :'/list/index'
-      end 
-    end 
+        end  
+          
+        @list = current_user.list
+        params[:items].each do |ih| 
+            if ih[:name] != ""
+              Item.create(name: ih[:name], itemizable: @list)   
+            end
+          end 
+          redirect '/list'
+        
+    end  
+     
 
     get '/list/:id/edit' do
       authenticate
       @list = current_user.list
       @list.items.find_by(name: params[:name])
       erb :'/list/edit'
-  end
+   end
 
 
   delete '/list/:id' do 
     @list_item = current_user.list.items.find_by(name: params[:name])
     redirect "list/index"
-end 
+  end 
 
 end 
+ 

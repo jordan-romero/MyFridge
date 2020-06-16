@@ -1,9 +1,9 @@
 WHERE AM I 
 
-<h2>Edit <%= @fridge.items.name %> </h2>
+<h2>Edit Item</h2>
 
 
-<form action="/fridge/" method="POST">
+<form action="/fridge/:id/i" method="POST">
   <input type="hidden" id="hidden" name="_method" value="PATCH">
   <label for="name">Item Name:</label>
   <input type="text" name="item name" placeholder="Chicken"><br>

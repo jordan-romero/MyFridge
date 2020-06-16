@@ -7,7 +7,7 @@ class FridgeController < ApplicationController
     get '/fridge' do
         authenticate
         @user = current_user
-        @fridge = current_user.fridge.id
+        @fridge = current_user.fridge
         erb :'/fridge/index'
       end
 
@@ -17,10 +17,11 @@ class FridgeController < ApplicationController
         erb :'fridge/new'
     end
 
-    get '/fridge/:id' do
-        @fridge = current_user.fridge.id
+    get '/fridge/show' do
+        @fridge = current_user.fridge
+        @fridge.items.find_by(params[:name])
         # authorize(@fridge)
-        erb :'fridge/index'
+        erb :'fridge/show'
       end
 
     post '/fridge' do
@@ -30,7 +31,7 @@ class FridgeController < ApplicationController
         elsif
             @fridge = current_user.fridge
             @fridge.items << Item.create(name: params[:name], expy_date: params[:expy_date])
-            redirect 'fridge/:id'
+            redirect '/fridge'
 
         else
             puts "Oops! Something went wrong!"
@@ -38,11 +39,11 @@ class FridgeController < ApplicationController
         end
     end
 
-    get '/fridge/:id/edit' do
+    get '/fridge/edit' do
         authenticate
         @fridge = current_user.fridge
         @fridge.items.find_by(name: params[:name], expy_date: params[:expy_date])
-        erb :'/fridge/edit'
+        erb :'fridge/edit'
     end
 
     # patch '/fridge/' do 
@@ -51,7 +52,7 @@ class FridgeController < ApplicationController
 
     #     if @fridge.items.update(name: params[:name], expy_date: params[:expy_date])
     
-    #     redirect '/fridge/:id'
+    #     redirect '/fridge/:name'
 
     #     else
 
@@ -59,7 +60,7 @@ class FridgeController < ApplicationController
     #     end 
      
     # end 
-    delete '/fridge/:id' do 
+    delete '/fridge/:name' do 
         @fridge_item = current_user.fridge.items.find_by(name: params[:name], expy_date: params[:expy_date])
         @fridge_item.destroy
         redirect "fridge/index"
