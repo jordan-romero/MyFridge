@@ -46,7 +46,7 @@ class ListController < ApplicationController
       erb :'list_items/edit'
    end
 
-  patch '/list_items/:id' do 
+   patch '/list_items/:id' do 
     authenticate
       @list = current_user.list
       @item = Item.find_by(id: params[:id])
