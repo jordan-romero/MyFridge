@@ -1,4 +1,4 @@
-class ListController < ApplicationController 
+class ListsController < ApplicationController 
 
     get '/list' do 
       authenticate

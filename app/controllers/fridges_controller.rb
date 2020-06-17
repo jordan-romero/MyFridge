@@ -1,8 +1,6 @@
 require './config/env'
 
-class FridgeController < ApplicationController
-    
-    set :method_override, true
+class FridgesController < ApplicationController
 
     get '/fridge' do
         authenticate

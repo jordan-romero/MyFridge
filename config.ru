@@ -1,8 +1,9 @@
 require_relative './config/env'
 
 
-use ListController     
-use FridgeController
+use Rack::MethodOverride
+use ListsController     
+use FridgesController
 use UsersController
 use SessionsController 
 run ApplicationController
