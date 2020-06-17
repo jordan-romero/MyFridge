@@ -21,7 +21,7 @@ class ListController < ApplicationController
         authenticate
         @list = current_user.list
         @item = @list.items.find_by(id: params[:id])
-        # authorize(@fridge)
+        # authorize(@list)
         erb :'list_items/show'
     end
 
@@ -29,8 +29,11 @@ class ListController < ApplicationController
     post '/list' do
       authenticate
       @list = current_user.list
-      @list_items = @list.items 
-      @list_items << Item.create(name: params[:name])
+      params[:items].each do |ih| 
+       if ih[:name] != ""
+          Item.create(name: ih[:name], itemizable: @list)   
+       end
+      end 
       redirect '/list'
         
     end  
@@ -39,16 +42,16 @@ class ListController < ApplicationController
     get '/list_items/:id/edit' do
       authenticate
       @list = current_user.list
-      @list.items.find_by(name: params[:name])
+      @item = @list.items.find_by(id: params[:id])
       erb :'list_items/edit'
    end
 
   patch '/list_items/:id' do 
     authenticate
-        @list = current_user.list
-        @item = Item.find_by(id: params[:id])
-        @item.update(name: params[:name]) 
-     redirect '/list'
+      @list = current_user.list
+      @item = Item.find_by(id: params[:id])
+      @item.update(name: params[:name]) 
+      redirect '/list'
   end 
 
 
