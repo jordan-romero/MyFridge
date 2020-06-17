@@ -24,7 +24,7 @@ class FridgesController < ApplicationController
         authenticate
         @fridge = current_user.fridge
         @item = @fridge.items.find_by(id: params[:id])
-        # authorize(@fridge)
+        authorize(@fridge)
         erb :'fridge_items/show'
       end
 
@@ -41,6 +41,7 @@ class FridgesController < ApplicationController
         authenticate
         @fridge = current_user.fridge
         @item = Item.find_by(id: params[:id])
+        authorize(@fridge)
         erb :'fridge_items/edit'
     end
     
@@ -49,6 +50,7 @@ class FridgesController < ApplicationController
         authenticate
             @fridge = current_user.fridge
             @item = Item.find_by(id: params[:id])
+            authorize(@fridge)
             @item.update(name: params[:name], expy_date: params[:expy_date]) 
          redirect '/fridge'
      end 
@@ -60,6 +62,7 @@ class FridgesController < ApplicationController
         authenticate
         @fridge = current_user.fridge
         @item = Item.find_by(id: params[:id])
+        authorize(@fridge)
         @item.destroy
         redirect "/fridge"
     end 

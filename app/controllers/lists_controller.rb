@@ -21,7 +21,7 @@ class ListsController < ApplicationController
         authenticate
         @list = current_user.list
         @item = @list.items.find_by(id: params[:id])
-        # authorize(@list)
+        authorize(@list)
         erb :'list_items/show'
     end
 
@@ -43,6 +43,7 @@ class ListsController < ApplicationController
       authenticate
       @list = current_user.list
       @item = @list.items.find_by(id: params[:id])
+      authorize(@list)
       erb :'list_items/edit'
    end
 
@@ -50,6 +51,7 @@ class ListsController < ApplicationController
     authenticate
       @list = current_user.list
       @item = Item.find_by(id: params[:id])
+      authorize(@list)
       @item.update(name: params[:name]) 
       redirect '/list'
   end 
@@ -59,6 +61,7 @@ class ListsController < ApplicationController
     authenticate
     @list = current_user.fridge
     @item = Item.find_by(id: params[:id])
+    authorize(@list)
     @item.destroy
     redirect "/list"
 end 

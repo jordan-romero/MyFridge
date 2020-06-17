@@ -2,7 +2,7 @@
 
 <ul>
 <% current_user.list_items.all.sort {|a, b| a.name <=> b.name}.each do |item| %>
-   <li><%= item.name %> <a href='/list_items/<%= item.id %>/edit'> Edit Item </a></li>
+   <li><%= item.name %> <a href='/list_items/<%= item.id %>'> View Item </a></li>
 <% end%>
 </ul>
 <br><br>

@@ -2,7 +2,7 @@
 <h2>You have <%=current_user.fridge_items.length%> items in your Fridge </h2>
 <ul>
 <% current_user.fridge_items.all.sort {|a, b| a.name <=> b.name}.each do |item| %>
-   <li><%= item.name %> <%= item.expy_date %> <a href='/fridge_items/<%= item.id %>/edit'> Edit Item </a></li>
+   <li><%= item.name %> <%= item.expy_date %> <a href='/fridge_items/<%= item.id %>'> View Item </a></li>
 
 <% end%>
 </ul>
