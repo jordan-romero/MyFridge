@@ -2,7 +2,7 @@ Am I real?
 
 <ul>
 <% current_user.list_items.all.sort {|a, b| a.name <=> b.name }.each do |item| %>
-   <li><%= item.name %> <a href='/list/edit'>Edit Item </a></li>
+   <li><%= item.name %> <a href='/list/<%= item.id %>/edit'>Edit Item </a></li>
 <% end%>
 </ul>
 <br><br>

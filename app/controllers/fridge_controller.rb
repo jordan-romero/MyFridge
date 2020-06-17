@@ -7,63 +7,63 @@ class FridgeController < ApplicationController
     get '/fridge' do
         authenticate
         @user = current_user
+        if current_user.fridge == nil
+            Fridge.create(user: current_user)
+        end 
+       
         @fridge = current_user.fridge
-        erb :'/fridge/index'
+        @item = @fridge.items.find_by(id: params[:id])
+        erb :'fridge/index'
       end
 
 
-    get '/fridge/new' do
+    get '/fridge_items/new' do
         authenticate
-        erb :'fridge/new'
+        erb :'fridge_items/new'
     end
 
-    get '/fridge/show' do
+    get '/fridge_items/:id' do
+        authenticate
         @fridge = current_user.fridge
-        @fridge.items.find_by(params[:name])
+        @item = @fridge.items.find_by(id: params[:id])
         # authorize(@fridge)
-        erb :'fridge/show'
+        erb :'fridge_items/show'
       end
 
     post '/fridge' do
         authenticate
-        if current_user.fridge == nil
-            Fridge.create(user: current_user)
-        elsif
             @fridge = current_user.fridge
-            @fridge.items << Item.create(name: params[:name], expy_date: params[:expy_date])
+            @fridge_items = @fridge.items 
+            @fridge_items << Item.create(name: params[:name], expy_date: params[:expy_date])
             redirect '/fridge'
-
-        else
-            puts "Oops! Something went wrong!"
-            redirect '/fridge/new'
-        end
     end
 
-    get '/fridge/edit' do
+
+    get '/fridge_items/:id/edit' do
         authenticate
         @fridge = current_user.fridge
-        @fridge.items.find_by(name: params[:name], expy_date: params[:expy_date])
-        erb :'fridge/edit'
+        @item = Item.find_by(id: params[:id])
+        erb :'fridge_items/edit'
     end
-
-    # patch '/fridge/' do 
-    #     authenticate
-    #     @fridge.items.find_or_create_by(name: params[:name], expy_date: params[:expy_date])
-
-    #     if @fridge.items.update(name: params[:name], expy_date: params[:expy_date])
     
-    #     redirect '/fridge/:name'
 
-    #     else
-
-    #         erb :'fridge/<%=@fridge.item.name%>/edit'
-    #     end 
+     patch '/fridge_items/:id' do 
+        authenticate
+            @fridge = current_user.fridge
+            @item = Item.find_by(id: params[:id])
+            @item.update(name: params[:name], expy_date: params[:expy_date]) 
+         redirect '/fridge'
+     end 
      
-    # end 
-    delete '/fridge/:name' do 
-        @fridge_item = current_user.fridge.items.find_by(name: params[:name], expy_date: params[:expy_date])
-        @fridge_item.destroy
-        redirect "fridge/index"
+     
+     
+     
+    delete '/fridge_items/:id' do 
+        authenticate
+        @fridge = current_user.fridge
+        @item = Item.find_by(id: params[:id])
+        @item.destroy
+        redirect "/fridge"
     end 
 
 

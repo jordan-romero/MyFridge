@@ -27,13 +27,8 @@ class ListController < ApplicationController
         if current_user.list == nil 
             List.create(user: current_user)
         end  
-          
         @list = current_user.list
-        params[:items].each do |ih| 
-            if ih[:name] != ""
-              Item.create(name: ih[:name], itemizable: @list)   
-            end
-          end 
+ 
           redirect '/list'
         
     end  
