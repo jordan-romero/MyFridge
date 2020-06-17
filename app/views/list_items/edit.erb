@@ -1,13 +1,18 @@
-WHERE AM I 
-
 <h2>Edit Item</h2>
 
 
-<form action="/list/<%= @list.items %>" method="POST">
+<form action="/list_items/<%= @item.id %>" method="POST">
   <input type="hidden" id="hidden" name="_method" value="PATCH">
-  <label for="name">Item Name:</label>
-  <input type="text" name="item name" placeholder="Chicken"><br>
-
-  <br>
+  <br><br>
+  <label for="name">Item Name:</label>    
+  <input type="text" name="name" value="<%= @item.name %>" placeholder="Chicken"><br>
   <input type="submit" value="Update Item">
 </form>
+<br><br>
+
+<form action="/list_items/<%= @item.id %>" method="POST">
+<input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete this Item">
+</form><br>
+
+  

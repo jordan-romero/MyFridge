@@ -2,50 +2,63 @@ class ListController < ApplicationController
 
     get '/list' do 
       authenticate
-      @user = current_user
-      @list = current_user.list.id 
-      erb :'list/index'
+        @user = current_user
+        if current_user.list == nil
+             List.create(user: current_user)
+        end 
+       
+        @list = current_user.list
+        @item = @list.items.find_by(id: params[:id])
+        erb :'list/index'
     end 
  
-    get '/list/new' do 
+    get '/list_items/new' do 
         authenticate
-        @user = current_user
-        erb :'/list/new'
+        erb :'list_items/new'
       end 
 
-    get '/list/:id' do
+    get '/list_items/:id' do
         authenticate
-        @list = current_user.list.id
+        @list = current_user.list
+        @item = @list.items.find_by(id: params[:id])
         # authorize(@fridge)
-        erb :'list/index'
+        erb :'list_items/show'
     end
 
 
     post '/list' do
-      
-        authenticate
-        if current_user.list == nil 
-            List.create(user: current_user)
-        end  
-        @list = current_user.list
- 
-          redirect '/list'
+      authenticate
+      @list = current_user.list
+      @list_items = @list.items 
+      @list_items << Item.create(name: params[:name])
+      redirect '/list'
         
     end  
      
 
-    get '/list/:id/edit' do
+    get '/list_items/:id/edit' do
       authenticate
       @list = current_user.list
       @list.items.find_by(name: params[:name])
-      erb :'/list/edit'
+      erb :'list_items/edit'
    end
 
-
-  delete '/list/:id' do 
-    @list_item = current_user.list.items.find_by(name: params[:name])
-    redirect "list/index"
+  patch '/list_items/:id' do 
+    authenticate
+        @list = current_user.list
+        @item = Item.find_by(id: params[:id])
+        @item.update(name: params[:name]) 
+     redirect '/list'
   end 
+
+
+  delete '/list_items/:id' do 
+    authenticate
+    @list = current_user.fridge
+    @item = Item.find_by(id: params[:id])
+    @item.destroy
+    redirect "/list"
+end 
 
 end 
  

@@ -1,12 +1,12 @@
-Am I real? 
+<h2>You have <%=current_user.list_items.length%> items on your Grocery List </h2>
 
 <ul>
 <% current_user.list_items.all.sort {|a, b| a.name <=> b.name }.each do |item| %>
-   <li><%= item.name %> <a href='/list/<%= item.id %>/edit'>Edit Item </a></li>
+   <li><%= item.name %> <a href='/list_items/<%= item.id %>/edit'> Edit Item </a></li>
 <% end%>
 </ul>
 <br><br>
-<a href='/list/new'> Make a new item</a>
+<a href='/list_item/new'> Make a new item</a>
 
 <br><br>
 

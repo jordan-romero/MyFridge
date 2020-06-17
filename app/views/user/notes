@@ -1,8 +1,0 @@
-
-<h3><a href='fridge/items/show'>Your Items</a></h3>
-<ul>
-<% @items.all.sort {|a, b| a.name <=> b.name }.each do |item| %>
-  <li><a href="/items/show<%=  %>"><%= item.name %></a></li>
-<% end%>
-</ul>
-<a href="/items/new">Make a New Item</a>
