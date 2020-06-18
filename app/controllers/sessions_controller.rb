@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     end 
 
     post '/signup' do 
-        @user = User.new(name: sanitize(params[:name]), username: sanitize(params[:username]), password: params[:password], email: params[:email])
+        @user = User.new(name: sanitize(params[:name]), username: sanitize(params[:username]), password: sanitize(params[:password]), email: sanitize(params[:email]))
         if @user.save
             session[:user_id] = @user.id
             redirect '/dashboard'
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
     post '/login' do 
         user = User.find_by(username: params[:username])
-        if user && user.authenticate(sanitize(params[:password]))
+        if user && user.authenticate(params[:password])
             session[:user_id] = user.id
             redirect '/dashboard'
         else 
