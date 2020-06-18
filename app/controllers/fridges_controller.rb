@@ -32,7 +32,7 @@ class FridgesController < ApplicationController
         authenticate
             @fridge = current_user.fridge
             @fridge_items = @fridge.items 
-            @fridge_items << Item.create(name: params[:name], expy_date: params[:expy_date])
+            @fridge_items << Item.create(name: sanitize(params[:name]).downcase.capitalize, expy_date: sanitize(params[:expy_date]))
             redirect '/fridge'
     end
 
@@ -51,7 +51,7 @@ class FridgesController < ApplicationController
             @fridge = current_user.fridge
             @item = Item.find_by(id: params[:id])
             authorize(@fridge)
-            @item.update(name: params[:name], expy_date: params[:expy_date]) 
+            @item.update(name: sanitize(params[:name]).downcase.capitalize, expy_date: sanitize(params[:expy_date])) 
          redirect '/fridge'
      end 
      

@@ -31,7 +31,7 @@ class ListsController < ApplicationController
       @list = current_user.list
       params[:items].each do |ih| 
        if ih[:name] != ""
-          Item.create(name: ih[:name], itemizable: @list)   
+          Item.create(name: sanitize(ih[:name]).downcase.capitalize, itemizable: @list)   
        end
       end 
       redirect '/list'
@@ -52,7 +52,7 @@ class ListsController < ApplicationController
       @list = current_user.list
       @item = Item.find_by(id: params[:id])
       authorize(@list)
-      @item.update(name: params[:name]) 
+      @item.update(name: sanitize(params[:name]).downcase.capitalize) 
       redirect '/list'
   end 
 

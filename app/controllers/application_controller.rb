@@ -33,4 +33,8 @@ class ApplicationController < Sinatra::Base
             redirect "/dashboard" if lof.user != current_user
         end 
     end 
+
+    def sanitize(params)
+        Sanitize.fragment(params)
+      end
 end 
