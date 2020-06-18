@@ -1,0 +1,25 @@
+html{
+    background-color: whitesmoke;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+    height: 3em;
+    background-color: lightgrey;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    text-align: center;
+}
+
+a:hover{
+    color: cornflowerblue;
+}

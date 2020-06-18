@@ -1,21 +1,15 @@
 <h2>Welcome to your Fridge, <%= current_user.username %> </h2>
+<% if current_user.fridge_items.length == 0 %>
+    <h3>Your Fridge is Empty, <a href='/fridge_items/new'> Add an Item to your Fridge</a></h3>
+<% end %>
 
-
-<a href='/fridge'> Open your Fridge</a>
-<br><br>
 <a href='/fridge_items/new'> Add an Item to your Fridge</a>
-
-
-<br><br>
-<a href='/list'> View Your Grocery List</a>
 
 <br> <br>
 
 <a href='/list_items/new'> Add new Item(s) to your Grocery List</a>
 
-<br><br>
 
-<a href='/logout'> Log Out </a>
 
 
 
