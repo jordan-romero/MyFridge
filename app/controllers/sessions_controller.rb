@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     end 
 
     post '/signup' do 
-        @user = User.new(name: sanitize(params[:name]), username: sanitize(params[:username]), password: sanitize(params[:password]), email: sanitize(params[:email]))
+        @user = User.new(name: sanitize(params[:name]), username: sanitize(params[:username]), password: sanitize(params[:password]), password_confirmation: sanitize(params[:password_confirmation]), email: sanitize(params[:email]))
         if @user.save
             session[:user_id] = @user.id
             redirect '/dashboard'

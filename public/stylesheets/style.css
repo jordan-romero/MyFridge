@@ -5,19 +5,27 @@ html{
 
 .navbar{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    align-items: center; 
     border-radius: 5px;
-    height: 3em;
+    height: 4em;
     background-color: lightgrey;
+    padding-right: 100px;
+    padding-left: 10px;
 }
 
 a{
     text-decoration: none;
+    color: teal;
+}
+
+.navbar-logo{
+   height: 4em; 
+   width: 4em;
 }
 
 body{
-    text-align: center;
+    text-align: center; 
 }
 
 a:hover{

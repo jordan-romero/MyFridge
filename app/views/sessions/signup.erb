@@ -7,11 +7,17 @@
 <% end %>
 
 <form action="/signup" method="post">
+    <label for="name">Name:</label>
     <input type="text" placeholder="Name" name="name">
+    <label for="username">Username:</label>
     <input type="text" placeholder="Username" name="username">
+     <label for="email">Email:</label>
+    <input type="text" placeholder="Email" name="email"><br><br><br>
+    <label for="password">Password:</label>
     <input type="password" placeholder="Password" name="password">
-    <input type="text" placeholder="Email" name="email">
-    <input type="submit" value="Sign Up">
+    <label for="password_confirmation">Confirm your Password:</label>
+    <input type="password" placeholder="Confirm Password" name="password_confirmation"><br><br>
+
+    <input type="submit" value="Sign Up"><br>
 </form>
 <br><br>
-<a href="/login"> Log In </a>
