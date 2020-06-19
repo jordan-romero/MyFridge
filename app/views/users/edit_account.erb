@@ -1,0 +1,15 @@
+<% if @user && @user.errors.any? %>
+    <% @user.errors.full_messages.each do |msg| %>
+        <p class="danger"> <%= msg %> </p>
+    <% end %>
+
+<% end %>
+<h4>Enter your password to make changes to your account.</h4>
+<form action="/account" method="POST">
+    <input type="hidden" name="_method" value="patch"> 
+    <input type="text" placeholder="New Username" value="<%= current_user.username %>" name="username"><br>
+    <input type="password" placeholder="Current Password" name="password"><br>
+    <input type="password" placeholder="New Password" name="new_password"><br>
+    <input type="password" placeholder="Password Confirmation" name="new_password_confirmation"><br><br>
+    <input type="submit" value="Update Account">
+</form>

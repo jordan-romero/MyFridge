@@ -2,7 +2,11 @@ html{
     background-color: whitesmoke;
     font-family: 'Josefin Sans', sans-serif;
 }
+.danger{ 
 
+    color: palevioletred; 
+
+}
 .navbar{
     display: flex;
     justify-content: space-between;
@@ -26,6 +30,14 @@ a{
 
 body{
     text-align: center; 
+}
+
+.table{
+    text-align: left;
+}
+
+tbody{
+    text-align: left;
 }
 
 a:hover{
