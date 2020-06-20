@@ -4,47 +4,76 @@ class ApplicationController < Sinatra::Base
         set :views, -> {File.join(root, "../views")}
         enable :sessions
         set :session_secret, ENV['SESSION_SECRET']
-      end
+        disable :show_exceptions
+    end
     
 
 
     get '/' do 
-
-        erb :index
-
+        if logged_in?
+            redirect '/dashboard'
+        else
+            erb :index
+        end  
     end 
 
 
     helpers do 
 
-    def current_user
-        @user ||= User.find_by(id: session[:user_id])
-    end 
+        def current_user
+            @user ||= User.find_by(id: session[:user_id])
+        end 
 
-    def logged_in? 
-        !!current_user
-    end 
+        def logged_in? 
+            !!current_user
+        end 
         
-    def authenticate
-        redirect 'login' if !logged_in? 
-    end 
+        def authenticate
+            #redirect 'login' if !logged_in?  
+            raise AuthenticationError.new if !logged_in?
+        end 
+        
 
-    def authorize(lof)
-        authenticate
-        lof.user = current_user
-        redirect "/dashboard" if lof.user != current_user
+        def authorize(lof)
+            authenticate
+            lof.user = current_user
+            raise AuthorizationError.new if lof.user != current_user
+            #redirect "/dashboard" if lof.user != current_user 
+        end 
+
+        def sanitize(params)
+            Sanitize.fragment(params)
+        end
+
+        def render_navbar
+            if logged_in? 
+                erb :logged_in_navbar
+            else 
+                erb :logged_out_navbar
+            end 
         end 
     end 
-
-    def sanitize(params)
-        Sanitize.fragment(params)
+    
+    not_found do 
+        status 404
+        erb :not_found, layout: false
     end
 
-    def render_navbar
-        if logged_in? 
-            erb :logged_in_navbar
-        else 
-            erb :logged_out_navbar
-        end 
-    end 
-end 
+    error AuthenticationError do 
+        status 403
+        erb :not_authenticated, layout: false
+    end
+
+    error AuthorizationError do 
+        status 403
+        erb :not_authorized, layout: false
+    end
+     
+
+    error ActiveRecord::RecordNotFound do 
+        status 404
+        erb :not_found, layout: false
+    end
+end  
+
+ 
